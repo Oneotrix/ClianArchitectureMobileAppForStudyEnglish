@@ -7,7 +7,7 @@ import com.github.oneotrix.englishteasher.domain.repository.UserRepository
 private const val FIREBASE_TAG = "Firebase"
 private const val SQLITE_TAG = "SQlite"
 
-class UserRepositoryImpl : UserRepository{
+class UserRepositoryImpl : UserRepository {
 
     override fun sendDataToAuthInFirebase(userLoginAndPassword: UserLoginAndPassword) {
         Log.i(FIREBASE_TAG, "send to firebase user data to auth \n" +

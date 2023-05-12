@@ -2,10 +2,13 @@ package com.github.oneotrix.englishteasher
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import com.github.oneotrix.englishteasher.databinding.ActivityMainBinding
+import com.github.oneotrix.englishteasher.presentation.SignInFragment
 import com.github.oneotrix.englishteasher.presentation.SplashScreenFragment
+import com.github.oneotrix.englishteasher.presentation.contracts.Navigator
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), Navigator {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -22,5 +25,21 @@ class MainActivity : AppCompatActivity() {
                 .add(binding.fragmentContainer.id, fragment)
                 .commit()
         }
+    }
+
+    override fun goBack() {
+        onBackPressedDispatcher.onBackPressed()
+    }
+
+    override fun onSignIn() {
+        launchFragment(SignInFragment.newInstance())
+    }
+
+    private fun launchFragment(fragment: Fragment) {
+            supportFragmentManager
+                .beginTransaction()
+                .addToBackStack(null)
+                .replace(binding.fragmentContainer.id, fragment)
+                .commit()
     }
 }

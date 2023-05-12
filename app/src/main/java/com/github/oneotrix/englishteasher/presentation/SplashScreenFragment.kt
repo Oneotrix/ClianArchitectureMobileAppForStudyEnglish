@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.github.oneotrix.englishteasher.databinding.FragmentSplashScreenBinding
+import com.github.oneotrix.englishteasher.presentation.contracts.navigator
 
 class SplashScreenFragment: Fragment() {
 
@@ -27,11 +28,7 @@ class SplashScreenFragment: Fragment() {
             }
 
             override fun onFinish() {
-                parentFragmentManager
-                    .beginTransaction()
-                    .addToBackStack(null)
-                    .replace(container!!.id, signInFragment)
-                    .commit()
+                navigator().onSignIn()
             }
 
         }
