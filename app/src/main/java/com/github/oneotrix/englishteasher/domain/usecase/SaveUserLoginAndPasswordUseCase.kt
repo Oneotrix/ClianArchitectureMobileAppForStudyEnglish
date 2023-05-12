@@ -1,12 +1,13 @@
 package com.github.oneotrix.englishteasher.domain.usecase
 
 import android.util.Log
-import com.github.oneotrix.englishteasher.domain.models.SaveUserLoginAndPassword
+import com.github.oneotrix.englishteasher.domain.models.UserLoginAndPassword
+import com.github.oneotrix.englishteasher.domain.repository.UserRepository
 
-class SaveUserLoginAndPasswordUseCase {
+class SaveUserLoginAndPasswordUseCase(private val userRepository: UserRepository) {
 
-    fun execute(userData: SaveUserLoginAndPassword) {
-        Log.i("SaveDATA", "${userData.login}, ${userData.password}")
+    fun execute(userData: UserLoginAndPassword) {
+        userRepository.saveUserDataInLocalDatabase(userData)
     }
 
 }

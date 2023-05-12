@@ -1,14 +1,13 @@
 package com.github.oneotrix.englishteasher.domain.usecase
 
 import android.util.Log
-import com.github.oneotrix.englishteasher.domain.models.SaveUserLoginAndPassword
 import com.github.oneotrix.englishteasher.domain.models.UserLoginAndPassword
+import com.github.oneotrix.englishteasher.domain.repository.UserRepository
 
-class SendUserLoginAndPasswordToFirebaseForAuthUseCase {
+class SendUserLoginAndPasswordToFirebaseForAuthUseCase(private val userRepository: UserRepository) {
 
     fun execute(userLoginAndPassword: UserLoginAndPassword) {
-        Log.i("SendToFirebase", "send to firebase user data to auth \n" +
-                "login : ${userLoginAndPassword.login} \n" +
-                "password: ${userLoginAndPassword.password}")
+
+        userRepository.sendDataToAuthInFirebase(userLoginAndPassword)
     }
 }
