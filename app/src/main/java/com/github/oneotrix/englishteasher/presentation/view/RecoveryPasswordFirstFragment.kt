@@ -1,4 +1,4 @@
-package com.github.oneotrix.englishteasher.presentation
+package com.github.oneotrix.englishteasher.presentation.view
 
 import android.os.Bundle
 import android.view.LayoutInflater

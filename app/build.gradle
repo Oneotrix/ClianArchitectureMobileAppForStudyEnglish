@@ -46,4 +46,9 @@ dependencies {
 
     //add fragment
     implementation 'androidx.fragment:fragment-ktx:1.5.7'
+
+    //view-model
+    def lifecycle_version = "2.4.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
 }

@@ -1,4 +1,4 @@
-package com.github.oneotrix.englishteasher.presentation
+package com.github.oneotrix.englishteasher.presentation.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import com.github.oneotrix.englishteasher.data.repository.UserRepositoryImpl
 import com.github.oneotrix.englishteasher.databinding.FragmentRegistrationBinding
 import com.github.oneotrix.englishteasher.domain.models.UserDataReg
-import com.github.oneotrix.englishteasher.domain.repository.UserRepository
 import com.github.oneotrix.englishteasher.domain.usecase.SendUserDataToFirebaseForRegUseCase
 import com.github.oneotrix.englishteasher.presentation.contracts.navigator
 

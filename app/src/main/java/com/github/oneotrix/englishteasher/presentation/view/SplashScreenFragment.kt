@@ -1,4 +1,4 @@
-package com.github.oneotrix.englishteasher.presentation
+package com.github.oneotrix.englishteasher.presentation.view
 
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -20,8 +20,6 @@ class SplashScreenFragment: Fragment() {
     ): View? {
         binding = FragmentSplashScreenBinding.inflate(inflater, container, false)
 
-        val signInFragment = SignInFragment.newInstance()
-
         val timer = object : CountDownTimer(7000, 1000){
             override fun onTick(millisUntilFinished: Long) {
 
@@ -36,11 +34,6 @@ class SplashScreenFragment: Fragment() {
         return binding.root
     }
 
-
-    override fun onResume() {
-        super.onResume()
-
-    }
 
     companion object {
         fun newInstance() = SplashScreenFragment()

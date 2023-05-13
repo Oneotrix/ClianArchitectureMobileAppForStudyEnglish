@@ -4,8 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.github.oneotrix.englishteasher.databinding.ActivityMainBinding
-import com.github.oneotrix.englishteasher.presentation.*
 import com.github.oneotrix.englishteasher.presentation.contracts.Navigator
+import com.github.oneotrix.englishteasher.presentation.view.*
 
 class MainActivity : AppCompatActivity(), Navigator {
 
