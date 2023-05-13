@@ -18,4 +18,6 @@ interface Navigator {
 
     fun onRecoveryPasswordSecond()
 
+    fun onRecoveryPasswordThird()
+
 }

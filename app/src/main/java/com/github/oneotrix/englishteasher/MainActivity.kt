@@ -48,6 +48,10 @@ class MainActivity : AppCompatActivity(), Navigator {
         launchFragment(fragment = RecoveryPasswordSecondFragment.newInstance())
     }
 
+    override fun onRecoveryPasswordThird() {
+        launchFragment(fragment = RecoveryPasswordThirdFragment.newInstance())
+    }
+
     private fun launchFragment(fragment: Fragment) {
             supportFragmentManager
                 .beginTransaction()

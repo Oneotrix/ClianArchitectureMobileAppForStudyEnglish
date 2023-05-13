@@ -9,6 +9,7 @@ import com.github.oneotrix.englishteasher.data.repository.UserRepositoryImpl
 import com.github.oneotrix.englishteasher.databinding.FragmentRecoveryPasswordSecondBinding
 import com.github.oneotrix.englishteasher.domain.models.SecretCode
 import com.github.oneotrix.englishteasher.domain.usecase.SendSecretCodeForRecPasswordUseCase
+import com.github.oneotrix.englishteasher.presentation.contracts.navigator
 
 class RecoveryPasswordSecondFragment : Fragment() {
 
@@ -28,6 +29,9 @@ class RecoveryPasswordSecondFragment : Fragment() {
             val code = binding.secredCodeInput.text.toString()
             val secretCode = SecretCode(secretCode = code)
             sendSecretCodeForRecPasswordUseCase.execute(secretCode)
+
+            //if true
+            navigator().onRecoveryPasswordThird()
         }
 
         return binding.root
