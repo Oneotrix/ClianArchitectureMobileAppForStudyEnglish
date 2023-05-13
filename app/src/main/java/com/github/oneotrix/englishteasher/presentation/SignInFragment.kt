@@ -43,6 +43,10 @@ class SignInFragment: Fragment() {
             navigator().onRegistration()
         }
 
+        binding.forgotPasswordTextView.setOnClickListener {
+            navigator().onRecoveryPasswordFirst()
+        }
+
         return  binding.root
     }
 

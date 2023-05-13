@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.github.oneotrix.englishteasher.databinding.ActivityMainBinding
+import com.github.oneotrix.englishteasher.presentation.RecoveryPasswordFirstFragment
 import com.github.oneotrix.englishteasher.presentation.RegistrationFragment
 import com.github.oneotrix.englishteasher.presentation.SignInFragment
 import com.github.oneotrix.englishteasher.presentation.SplashScreenFragment
@@ -34,12 +35,16 @@ class MainActivity : AppCompatActivity(), Navigator {
 
     override fun onSignIn() {
        // launchFragment(SignInFragment.newInstance())
-        launchFragment(RegistrationFragment.newInstance())
+        launchFragment(fragment = RegistrationFragment.newInstance())
 
     }
 
     override fun onRegistration() {
-        launchFragment(RegistrationFragment.newInstance())
+        launchFragment(fragment = RegistrationFragment.newInstance())
+    }
+
+    override fun onRecoveryPasswordFirst() {
+        launchFragment(fragment = RecoveryPasswordFirstFragment.newInstance())
     }
 
     private fun launchFragment(fragment: Fragment) {

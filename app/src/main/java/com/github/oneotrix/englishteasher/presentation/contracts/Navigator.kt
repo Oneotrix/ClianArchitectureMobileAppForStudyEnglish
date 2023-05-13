@@ -14,4 +14,6 @@ interface Navigator {
 
     fun onRegistration()
 
+    fun onRecoveryPasswordFirst()
+
 }
