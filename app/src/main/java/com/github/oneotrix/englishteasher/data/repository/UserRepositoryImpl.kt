@@ -1,6 +1,7 @@
 package com.github.oneotrix.englishteasher.data.repository
 
 import android.util.Log
+import com.github.oneotrix.englishteasher.domain.models.SecretCode
 import com.github.oneotrix.englishteasher.domain.models.UserDataReg
 import com.github.oneotrix.englishteasher.domain.models.UserEmail
 import com.github.oneotrix.englishteasher.domain.models.UserLoginAndPassword
@@ -33,5 +34,10 @@ class UserRepositoryImpl : UserRepository {
     override fun sendEmailForRecoveryPassword(userEmail: UserEmail) {
         Log.i(FIREBASE_TAG, "send to firebase user email for recovery password \n" +
                 "email : ${userEmail.email}")
+    }
+
+    override fun sendSecretCodeForRecoveryPassword(secretCode: SecretCode) {
+        Log.i(FIREBASE_TAG, "send to firebase user secret code for recovery password \n" +
+                "email : ${secretCode.secretCode}")
     }
 }

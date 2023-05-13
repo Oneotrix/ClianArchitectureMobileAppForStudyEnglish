@@ -16,4 +16,6 @@ interface Navigator {
 
     fun onRecoveryPasswordFirst()
 
+    fun onRecoveryPasswordSecond()
+
 }

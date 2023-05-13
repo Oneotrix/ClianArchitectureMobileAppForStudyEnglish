@@ -9,6 +9,7 @@ import com.github.oneotrix.englishteasher.data.repository.UserRepositoryImpl
 import com.github.oneotrix.englishteasher.databinding.FragmentRecoveryPasswordFirstBinding
 import com.github.oneotrix.englishteasher.domain.models.UserEmail
 import com.github.oneotrix.englishteasher.domain.usecase.SendEmailForRecoveryPasswordUseCase
+import com.github.oneotrix.englishteasher.presentation.contracts.navigator
 
 class RecoveryPasswordFirstFragment : Fragment() {
 
@@ -28,6 +29,10 @@ class RecoveryPasswordFirstFragment : Fragment() {
             val email = binding.emailRecoveryPassword.text.toString()
             val userEmail = UserEmail(email = email)
             sendEmailForRecoveryPasswordUseCase.execute(userEmail)
+
+            //if true go to second screen recovery
+            navigator().onRecoveryPasswordSecond()
+
         }
 
         return binding.root
