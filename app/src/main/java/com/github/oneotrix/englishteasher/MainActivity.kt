@@ -31,8 +31,8 @@ class MainActivity : AppCompatActivity(), Navigator {
     }
 
     override fun onSignIn() {
-       // launchFragment(SignInFragment.newInstance())
-        launchFragment(fragment = RegistrationFragment.newInstance())
+        launchFragment(SignInFragment.newInstance())
+       // launchFragment(fragment = RegistrationFragment.newInstance())
 
     }
 

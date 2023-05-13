@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.github.oneotrix.englishteasher.data.repository.UserRepositoryImpl
+import com.github.oneotrix.englishteasher.data.storage.FireBaseUserStorage
+import com.github.oneotrix.englishteasher.data.storage.SqliteUserStorage
+import com.github.oneotrix.englishteasher.data.storage.interfaces.FirebaseStorage
 import com.github.oneotrix.englishteasher.databinding.FragmentSignInBinding
 import com.github.oneotrix.englishteasher.domain.models.UserLoginAndPassword
 import com.github.oneotrix.englishteasher.domain.usecase.SaveUserLoginAndPasswordUseCase
@@ -35,6 +38,8 @@ class SignInFragment: Fragment() {
             val password = binding.passwordField.text.toString()
 
             val userData = UserLoginAndPassword(login = login, password = password)
+
+            sendUserLoginAndPasswordToFirebaseForAuthUseCase.execute(userLoginAndPassword = userData)
             saveUserLoginAndPasswordUseCase.execute(userData = userData)
 
         }

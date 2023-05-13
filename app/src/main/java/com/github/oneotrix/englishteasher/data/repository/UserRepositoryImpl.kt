@@ -1,45 +1,56 @@
 package com.github.oneotrix.englishteasher.data.repository
 
-import android.util.Log
+import com.github.oneotrix.englishteasher.data.storage.FireBaseUserStorage
+import com.github.oneotrix.englishteasher.data.storage.SqliteUserStorage
+import com.github.oneotrix.englishteasher.data.storage.interfaces.FirebaseStorage
+import com.github.oneotrix.englishteasher.data.storage.interfaces.SQLiteStorage
+import com.github.oneotrix.englishteasher.data.storage.models.FirebaseSecretCode
+import com.github.oneotrix.englishteasher.data.storage.models.User
+import com.github.oneotrix.englishteasher.data.storage.models.UserPassword
 import com.github.oneotrix.englishteasher.domain.models.*
 import com.github.oneotrix.englishteasher.domain.repository.UserRepository
 
-private const val FIREBASE_TAG = "Firebase"
-private const val SQLITE_TAG = "SQlite"
 
-class UserRepositoryImpl : UserRepository {
+class UserRepositoryImpl(private val sqliteStorage: SQLiteStorage = SqliteUserStorage(),
+                         private val firebaseStorage: FirebaseStorage = FireBaseUserStorage()
+) : UserRepository {
 
     override fun sendDataToAuthInFirebase(userLoginAndPassword: UserLoginAndPassword) {
-        Log.i(FIREBASE_TAG, "send to firebase user data to auth \n" +
-                "login : ${userLoginAndPassword.login} \n" +
-                "password: ${userLoginAndPassword.password}")
+        val user = User(login = userLoginAndPassword.login,
+                        password = userLoginAndPassword.password,
+                        email = "")
+        firebaseStorage?.sendDataToAuthInFirebase(user)
     }
 
     override fun saveUserDataInLocalDatabase(userLoginAndPassword: UserLoginAndPassword) {
-        Log.i(SQLITE_TAG, "save user data to local database \n" +
-                "login : ${userLoginAndPassword.login} \n" +
-                "password: ${userLoginAndPassword.password}")
+        val user = User(login = userLoginAndPassword.login,
+                        password = userLoginAndPassword.password,
+                        email = "")
+        sqliteStorage?.saveUserData(user)
     }
 
     override fun sendUserDataToRegInFirebase(userDataReg: UserDataReg) {
-        Log.i(FIREBASE_TAG, "send to firebase user data to reg \n" +
-                "login : ${userDataReg.login} \n" +
-                "email : ${userDataReg.email} \n" +
-                "password: ${userDataReg.password}")
+        val user = User(login = userDataReg.login,
+                        password = userDataReg.password,
+                        email = userDataReg.email)
+        sqliteStorage?.saveUserData(user)
     }
 
     override fun sendEmailForRecoveryPassword(userEmail: UserEmail) {
-        Log.i(FIREBASE_TAG, "send to firebase user email for recovery password \n" +
-                "email : ${userEmail.email}")
+        val user = User(login = "",
+                        password = "",
+                        email = userEmail.email)
+        firebaseStorage?.sendEmailForRecoveryPassword(user)
     }
 
     override fun sendSecretCodeForRecoveryPassword(secretCode: SecretCode) {
-        Log.i(FIREBASE_TAG, "send to firebase user secret code for recovery password \n" +
-                "email : ${secretCode.secretCode}")
+        val firebaseSecretCode = FirebaseSecretCode(code = secretCode.secretCode)
+        firebaseStorage?.sendSecretCodeForRecoveryPassword(firebaseSecretCode)
     }
 
     override fun saveNewPassword(password: Password) {
-        Log.i(FIREBASE_TAG, "save new user password in firebase \n" +
-                "password : ${password.password}")
+        val userPassword = UserPassword(password = password.password)
+        sqliteStorage?.saveNewPassword(userPassword)
     }
+
 }
