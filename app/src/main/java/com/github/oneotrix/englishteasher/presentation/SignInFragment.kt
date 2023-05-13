@@ -10,6 +10,7 @@ import com.github.oneotrix.englishteasher.databinding.FragmentSignInBinding
 import com.github.oneotrix.englishteasher.domain.models.UserLoginAndPassword
 import com.github.oneotrix.englishteasher.domain.usecase.SaveUserLoginAndPasswordUseCase
 import com.github.oneotrix.englishteasher.domain.usecase.SendUserLoginAndPasswordToFirebaseForAuthUseCase
+import com.github.oneotrix.englishteasher.presentation.contracts.navigator
 
 class SignInFragment: Fragment() {
 
@@ -36,6 +37,10 @@ class SignInFragment: Fragment() {
             val userData = UserLoginAndPassword(login = login, password = password)
             saveUserLoginAndPasswordUseCase.execute(userData = userData)
 
+        }
+
+        binding.RegistrationTextView.setOnClickListener {
+            navigator().onRegistration()
         }
 
         return  binding.root

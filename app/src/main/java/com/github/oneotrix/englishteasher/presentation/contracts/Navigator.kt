@@ -7,8 +7,11 @@ fun Fragment.navigator() : Navigator {
 }
 
 interface Navigator {
+
     fun goBack()
 
     fun onSignIn()
+
+    fun onRegistration()
 
 }

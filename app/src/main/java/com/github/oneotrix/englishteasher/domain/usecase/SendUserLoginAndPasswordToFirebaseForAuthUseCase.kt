@@ -7,7 +7,6 @@ import com.github.oneotrix.englishteasher.domain.repository.UserRepository
 class SendUserLoginAndPasswordToFirebaseForAuthUseCase(private val userRepository: UserRepository) {
 
     fun execute(userLoginAndPassword: UserLoginAndPassword) {
-
         userRepository.sendDataToAuthInFirebase(userLoginAndPassword)
     }
 }
