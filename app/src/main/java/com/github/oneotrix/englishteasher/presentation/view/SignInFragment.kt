@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.github.oneotrix.englishteasher.databinding.FragmentSignInBinding
 import com.github.oneotrix.englishteasher.presentation.contracts.navigator
 import com.github.oneotrix.englishteasher.presentation.viewmodel.SignInViewModel
-import com.github.oneotrix.englishteasher.presentation.viewmodel.SignInViewModelFactory
+import com.github.oneotrix.englishteasher.presentation.viewmodel.factory.SignInViewModelFactory
 
 class SignInFragment: Fragment() {
 
