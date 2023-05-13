@@ -1,3 +1,3 @@
 package com.github.oneotrix.englishteasher.data.storage.models
 
-class FirebaseSecretCode(val code: String)
+data class FirebaseSecretCode(val code: String = "")
