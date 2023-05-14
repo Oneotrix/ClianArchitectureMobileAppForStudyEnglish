@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "206610678555",
+    "firebase_url": "https://englishteacher-1c6a1-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "englishteacher-1c6a1",
+    "storage_bucket": "englishteacher-1c6a1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:206610678555:android:0fa694056556a599ee89be",
+        "android_client_info": {
+          "package_name": "com.github.oneotrix.englishteasher"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "206610678555-ccn5tlnpgak5cgpsud4rku9r6vnttjg2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDL7j5IrbnSJFrN2i5qd4ilsEUjghX5Mvc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "206610678555-ccn5tlnpgak5cgpsud4rku9r6vnttjg2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

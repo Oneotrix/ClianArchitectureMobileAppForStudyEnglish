@@ -29,11 +29,13 @@ class UserRepositoryImpl(private val sqliteStorage: SQLiteStorage = SqliteUserSt
         sqliteStorage?.saveUserData(user)
     }
 
-    override fun sendUserDataToRegInFirebase(userDataReg: UserDataReg) {
+    override fun sendUserDataToRegInFirebase(userDataReg: UserDataReg) : RegistrationResult {
         val user = User(login = userDataReg.login,
                         password = userDataReg.password,
                         email = userDataReg.email)
-        sqliteStorage?.saveUserData(user)
+        //sqliteStorage?.saveUserData(user)
+        val result = firebaseStorage.sendUserDataToRegInFirebase(userRegData = user)
+        return RegistrationResult(result.result, result.description)
     }
 
     override fun sendEmailForRecoveryPassword(userEmail: UserEmail) {

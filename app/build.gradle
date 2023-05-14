@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -51,4 +52,9 @@ dependencies {
     def lifecycle_version = "2.4.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
+
+    //firebase-realtime db
+    implementation 'com.google.firebase:firebase-database-ktx:20.2.1'
+    //firebase auth
+    implementation 'com.google.firebase:firebase-auth:22.0.0'
 }

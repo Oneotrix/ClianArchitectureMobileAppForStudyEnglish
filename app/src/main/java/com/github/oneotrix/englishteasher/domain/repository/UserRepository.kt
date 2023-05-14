@@ -8,7 +8,7 @@ interface UserRepository {
 
     fun saveUserDataInLocalDatabase(userLoginAndPassword: UserLoginAndPassword)
 
-    fun sendUserDataToRegInFirebase(userDataReg: UserDataReg)
+    fun sendUserDataToRegInFirebase(userDataReg: UserDataReg) : RegistrationResult
 
     fun sendEmailForRecoveryPassword(userEmail: UserEmail)
 
