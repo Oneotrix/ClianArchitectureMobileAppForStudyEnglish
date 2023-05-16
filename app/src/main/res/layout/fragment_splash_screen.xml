@@ -5,14 +5,25 @@
     android:background="@color/black"
     >
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/start_screen"
+        android:scaleType="centerCrop"
+        >
+
+
+    </ImageView>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:gravity="center_horizontal"
-        android:text="Splash Screen"
+        android:text="Учитель английского"
         android:textSize="32sp"
         android:textColor="@color/white"
+        android:layout_marginTop="200dp"
         >
 
     </TextView>
