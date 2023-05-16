@@ -57,4 +57,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-database-ktx:20.2.1'
     //firebase auth
     implementation 'com.google.firebase:firebase-auth:22.0.0'
+
+    //room
+    implementation 'androidx.room:room-runtime:2.5.1'
+    implementation 'androidx.room:room-compiler:2.5.1'
+    implementation 'androidx.room:room-ktx:2.5.1'
 }
