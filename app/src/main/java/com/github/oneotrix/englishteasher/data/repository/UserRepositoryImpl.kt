@@ -1,17 +1,18 @@
 package com.github.oneotrix.englishteasher.data.repository
 
 import com.github.oneotrix.englishteasher.data.storage.FireBaseUserStorage
-import com.github.oneotrix.englishteasher.data.storage.SqliteUserStorage
+import com.github.oneotrix.englishteasher.data.storage.RoomUserStorage
 import com.github.oneotrix.englishteasher.data.storage.interfaces.FirebaseStorage
-import com.github.oneotrix.englishteasher.data.storage.interfaces.SQLiteStorage
+import com.github.oneotrix.englishteasher.data.storage.interfaces.RoomStorage
 import com.github.oneotrix.englishteasher.data.storage.models.FirebaseSecretCode
 import com.github.oneotrix.englishteasher.data.storage.models.User
 import com.github.oneotrix.englishteasher.data.storage.models.UserPassword
+import com.github.oneotrix.englishteasher.data.storage.room.AppDatabase
 import com.github.oneotrix.englishteasher.domain.models.*
 import com.github.oneotrix.englishteasher.domain.repository.UserRepository
 
 
-class UserRepositoryImpl(private val sqliteStorage: SQLiteStorage = SqliteUserStorage(),
+class UserRepositoryImpl(private val roomStorage: RoomStorage = RoomUserStorage(),
                          private val firebaseStorage: FirebaseStorage = FireBaseUserStorage()
 ) : UserRepository {
 
@@ -26,14 +27,13 @@ class UserRepositoryImpl(private val sqliteStorage: SQLiteStorage = SqliteUserSt
         val user = User(login = userLoginAndPassword.login,
                         password = userLoginAndPassword.password,
                         email = "")
-        sqliteStorage?.saveUserData(user)
+        roomStorage?.saveUserData(user)
     }
 
     override fun sendUserDataToRegInFirebase(userDataReg: UserDataReg) : RegistrationResult {
         val user = User(login = userDataReg.login,
                         password = userDataReg.password,
                         email = userDataReg.email)
-        //sqliteStorage?.saveUserData(user)
         val result = firebaseStorage.sendUserDataToRegInFirebase(userRegData = user)
         return RegistrationResult(result.result, result.description)
     }
@@ -52,7 +52,11 @@ class UserRepositoryImpl(private val sqliteStorage: SQLiteStorage = SqliteUserSt
 
     override fun saveNewPassword(password: Password) {
         val userPassword = UserPassword(password = password.password)
-        sqliteStorage?.saveNewPassword(userPassword)
+        roomStorage?.saveNewPassword(userPassword)
+    }
+
+    override fun getUserDataForAuthFromDataBase(userDatabase: AppDatabase) : UserLoginAndPassword {
+        return roomStorage.selectAllUserData(userDatabase)
     }
 
 }

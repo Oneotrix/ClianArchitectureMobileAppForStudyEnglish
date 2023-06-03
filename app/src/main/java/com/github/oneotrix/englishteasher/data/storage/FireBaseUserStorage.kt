@@ -15,9 +15,7 @@ private const val FIREBASE_TAG = "Firebase"
 class FireBaseUserStorage : FirebaseStorage {
 
     override fun sendDataToAuthInFirebase(userLoginAndPassword: User) {
-        Log.i(FIREBASE_TAG, "send to firebase user data to auth \n" +
-                "login : ${userLoginAndPassword.login} \n" +
-                "password: ${userLoginAndPassword.password}")
+
     }
 
     override fun sendEmailForRecoveryPassword(userEmail: User) {

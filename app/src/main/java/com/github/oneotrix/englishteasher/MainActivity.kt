@@ -3,17 +3,32 @@ package com.github.oneotrix.englishteasher
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import com.github.oneotrix.englishteasher.data.storage.room.AppDatabase
 import com.github.oneotrix.englishteasher.databinding.ActivityMainBinding
+import com.github.oneotrix.englishteasher.presentation.contracts.Constants
 import com.github.oneotrix.englishteasher.presentation.contracts.Navigator
+import com.github.oneotrix.englishteasher.presentation.contracts.dbmanager.room.RoomDatabaseCreator
+import com.github.oneotrix.englishteasher.presentation.contracts.dbmanager.room.user.UserDatabaseProvider
 import com.github.oneotrix.englishteasher.presentation.view.*
 
-class MainActivity : AppCompatActivity(), Navigator {
+class MainActivity : AppCompatActivity(),
+        Navigator,
+        RoomDatabaseCreator,
+        UserDatabaseProvider
+
+{
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var userDB : AppDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
+        userDB = createUserDatabase(applicationContext)
+
         setContentView(R.layout.activity_main)
 
         if(savedInstanceState == null) {
@@ -58,5 +73,9 @@ class MainActivity : AppCompatActivity(), Navigator {
                 .addToBackStack(null)
                 .replace(binding.fragmentContainer.id, fragment)
                 .commit()
+    }
+
+    override fun getUserDatabase(): AppDatabase {
+        return userDB
     }
 }

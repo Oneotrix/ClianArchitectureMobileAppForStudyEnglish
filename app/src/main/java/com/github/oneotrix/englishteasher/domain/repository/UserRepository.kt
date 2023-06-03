@@ -1,5 +1,6 @@
 package com.github.oneotrix.englishteasher.domain.repository
 
+import com.github.oneotrix.englishteasher.data.storage.room.AppDatabase
 import com.github.oneotrix.englishteasher.domain.models.*
 
 interface UserRepository {
@@ -15,4 +16,6 @@ interface UserRepository {
     fun sendSecretCodeForRecoveryPassword(secretCode: SecretCode)
 
     fun saveNewPassword(password: Password)
+
+    fun getUserDataForAuthFromDataBase(userDatabase: AppDatabase): UserLoginAndPassword
 }
