@@ -11,6 +11,6 @@ interface RoomStorage {
 
     fun saveNewPassword(password: UserPassword)
 
-    fun selectAllUserData(userDatabase: AppDatabase): UserLoginAndPassword
+    fun selectAllUserData(): UserLoginAndPassword?
 
 }

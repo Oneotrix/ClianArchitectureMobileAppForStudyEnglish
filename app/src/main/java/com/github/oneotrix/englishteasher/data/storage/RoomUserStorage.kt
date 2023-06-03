@@ -12,11 +12,16 @@ import kotlinx.coroutines.runBlocking
 
 private const val ROOM_TAG = "Room"
 
-class RoomUserStorage : RoomStorage {
+class RoomUserStorage(userDatabase: AppDatabase) : RoomStorage {
+
+    private val userDB = userDatabase
+    private val userDao: UserDAO by lazy {
+        userDB.userDAO()
+    }
+
     override fun saveUserData(userDataReg: User) {
 
-
-
+        insertUser()
         Log.i(
             ROOM_TAG, "save to sqllite user data to reg \n" +
                     "login : ${userDataReg.login} \n" +
@@ -29,14 +34,21 @@ class RoomUserStorage : RoomStorage {
                 "password : ${password.password}")
     }
 
-    override fun selectAllUserData(userDatabase: AppDatabase): UserLoginAndPassword {
-        val userDAO = userDatabase.userDAO()
-        return selectUserFromDB(userDAO)
+    override fun selectAllUserData(): UserLoginAndPassword? {
+        return selectUserFromDB()
     }
 
-    private fun selectUserFromDB(userDao: UserDAO) : UserLoginAndPassword  = runBlocking {
+    private fun selectUserFromDB() : UserLoginAndPassword?  = runBlocking {
         val user = userDao.getUser()
-        return@runBlocking UserLoginAndPassword(user[0].email, user[0].password)
+        try {
+            return@runBlocking UserLoginAndPassword(user[0].email, user[0].password)
+        } catch (e: IndexOutOfBoundsException) {
+            return@runBlocking null
+        }
+    }
+
+    private fun insertUser() = runBlocking {
+        userDao.insertEmailAndPassword(User(login = "log", email = "em", password = "pass"))
     }
 
 

@@ -13,6 +13,7 @@ import com.github.oneotrix.englishteasher.data.repository.UserRepositoryImpl
 import com.github.oneotrix.englishteasher.databinding.FragmentRegistrationBinding
 import com.github.oneotrix.englishteasher.domain.models.UserDataReg
 import com.github.oneotrix.englishteasher.domain.usecase.SendUserDataToFirebaseForRegUseCase
+import com.github.oneotrix.englishteasher.presentation.contracts.dbmanager.room.user.userDbEntity
 import com.github.oneotrix.englishteasher.presentation.contracts.navigator
 import com.github.oneotrix.englishteasher.presentation.viewmodel.RegistrationViewModule
 import com.github.oneotrix.englishteasher.presentation.viewmodel.factory.RegistrationViewModuleFactory
@@ -22,7 +23,8 @@ class RegistrationFragment : Fragment() {
     private lateinit var binding: FragmentRegistrationBinding
 
     private val viewModule : RegistrationViewModule by lazy {
-        ViewModelProvider(this, RegistrationViewModuleFactory()).get(RegistrationViewModule::class.java)
+        ViewModelProvider(this, RegistrationViewModuleFactory(userDbEntity().getUserDatabase()))
+            .get(RegistrationViewModule::class.java)
     }
 
     override fun onCreateView(

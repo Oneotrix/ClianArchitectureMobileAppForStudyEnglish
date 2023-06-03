@@ -4,14 +4,12 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.github.oneotrix.englishteasher.data.storage.room.AppDatabase
-import com.github.oneotrix.englishteasher.data.storage.room.user.UserDAO
 import com.github.oneotrix.englishteasher.domain.models.UserLoginAndPassword
+import com.github.oneotrix.englishteasher.domain.results.AuthResult
 import com.github.oneotrix.englishteasher.domain.usecase.SaveUserLoginAndPasswordUseCase
 import com.github.oneotrix.englishteasher.domain.usecase.SendUserLoginAndPasswordToFirebaseForAuthFromDBUseCase
 import com.github.oneotrix.englishteasher.domain.usecase.SendUserLoginAndPasswordToFirebaseForAuthFromKeyboardUseCase
 import com.github.oneotrix.englishteasher.presentation.models.UserEmailAndPassword
-import kotlinx.coroutines.runBlocking
 
 private const val TAG = "SignInViewModel"
 
@@ -32,24 +30,41 @@ class SignInViewModel(
         Log.i(TAG, "SignInViewModel is created")
     }
 
-    fun signIn(login: String = "",
-               password: String = "",
-               userDB: AppDatabase? = null) {
+     suspend fun signInKeyboard(email: String, password: String) : String?{
+        val userData = UserLoginAndPassword(login = email, password = password)
 
-        if(userDB == null) {
-            signInKeyboard(login, password)
-        } else {
-             sendUserLoginAndPasswordToFirebaseForAuthFromDBUseCase.execute(userDB)
+        val answer = sendUserLoginAndPasswordToFirebaseForAuthFromKeyboardUseCase.execute(userLoginAndPassword = userData)
+
+        return when(answer) {
+            is AuthResult.Success -> {
+                saveUserLoginAndPasswordUseCase.execute(userData = userData)
+                null
+            }
+
+            is AuthResult.Error -> {
+                answer.message
+            }
         }
     }
 
-    private fun signInKeyboard(login: String, password: String) {
-        val userData = UserLoginAndPassword(login = login, password = password)
+     suspend fun signInDatabase() : String? {
+        val answer = sendUserLoginAndPasswordToFirebaseForAuthFromDBUseCase.execute()
 
-        sendUserLoginAndPasswordToFirebaseForAuthFromKeyboardUseCase.execute(userLoginAndPassword = userData)
-        saveUserLoginAndPasswordUseCase.execute(userData = userData)
+         return when(answer) {
+             is AuthResult.Success -> {
+                 val userData = UserLoginAndPassword(
+                     login = mLiveData.value!!.email,
+                     password = mLiveData.value!!.password)
+
+                 saveUserLoginAndPasswordUseCase.execute(userData = userData)
+                 null
+             }
+
+             is AuthResult.Error -> {
+                 answer.message
+             }
+         }
     }
-
 
 
     override fun onCleared() {

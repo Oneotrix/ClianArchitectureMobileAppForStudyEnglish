@@ -12,21 +12,23 @@ import com.github.oneotrix.englishteasher.domain.models.*
 import com.github.oneotrix.englishteasher.domain.repository.UserRepository
 
 
-class UserRepositoryImpl(private val roomStorage: RoomStorage = RoomUserStorage(),
-                         private val firebaseStorage: FirebaseStorage = FireBaseUserStorage()
-) : UserRepository {
+class UserRepositoryImpl(userDatabase: AppDatabase) : UserRepository {
 
-    override fun sendDataToAuthInFirebase(userLoginAndPassword: UserLoginAndPassword) {
-        val user = User(login = userLoginAndPassword.login,
+    private val roomStorage: RoomStorage = RoomUserStorage(userDatabase)
+    private val firebaseStorage: FirebaseStorage = FireBaseUserStorage()
+    override suspend fun sendDataToAuthInFirebase(userLoginAndPassword: UserLoginAndPassword) : String? {
+        val user = User(email = userLoginAndPassword.login,
                         password = userLoginAndPassword.password,
-                        email = "")
-        firebaseStorage?.sendDataToAuthInFirebase(user)
+                        login = "")
+        val result = firebaseStorage.sendDataToAuthInFirebase(user)
+
+        return result
     }
 
     override fun saveUserDataInLocalDatabase(userLoginAndPassword: UserLoginAndPassword) {
-        val user = User(login = userLoginAndPassword.login,
+        val user = User(email = userLoginAndPassword.login,
                         password = userLoginAndPassword.password,
-                        email = "")
+                        login = "")
         roomStorage?.saveUserData(user)
     }
 
@@ -55,8 +57,8 @@ class UserRepositoryImpl(private val roomStorage: RoomStorage = RoomUserStorage(
         roomStorage?.saveNewPassword(userPassword)
     }
 
-    override fun getUserDataForAuthFromDataBase(userDatabase: AppDatabase) : UserLoginAndPassword {
-        return roomStorage.selectAllUserData(userDatabase)
+    override fun getUserDataForAuthFromDataBase() : UserLoginAndPassword? {
+        return roomStorage.selectAllUserData()
     }
 
 }

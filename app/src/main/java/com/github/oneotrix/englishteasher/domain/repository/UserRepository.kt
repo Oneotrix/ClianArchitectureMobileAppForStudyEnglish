@@ -5,7 +5,7 @@ import com.github.oneotrix.englishteasher.domain.models.*
 
 interface UserRepository {
 
-    fun sendDataToAuthInFirebase(userLoginAndPassword: UserLoginAndPassword)
+    suspend fun sendDataToAuthInFirebase(userLoginAndPassword: UserLoginAndPassword) : String?
 
     fun saveUserDataInLocalDatabase(userLoginAndPassword: UserLoginAndPassword)
 
@@ -17,5 +17,5 @@ interface UserRepository {
 
     fun saveNewPassword(password: Password)
 
-    fun getUserDataForAuthFromDataBase(userDatabase: AppDatabase): UserLoginAndPassword
+    fun getUserDataForAuthFromDataBase(): UserLoginAndPassword?
 }

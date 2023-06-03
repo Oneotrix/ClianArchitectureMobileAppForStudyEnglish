@@ -11,6 +11,7 @@ import com.github.oneotrix.englishteasher.data.repository.UserRepositoryImpl
 import com.github.oneotrix.englishteasher.databinding.FragmentRecoveryPasswordFirstBinding
 import com.github.oneotrix.englishteasher.domain.models.UserEmail
 import com.github.oneotrix.englishteasher.domain.usecase.SendEmailForRecoveryPasswordUseCase
+import com.github.oneotrix.englishteasher.presentation.contracts.dbmanager.room.user.userDbEntity
 import com.github.oneotrix.englishteasher.presentation.contracts.navigator
 import com.github.oneotrix.englishteasher.presentation.viewmodel.RecoveryPasswordFirstViewModule
 import com.github.oneotrix.englishteasher.presentation.viewmodel.factory.RecoveryPasswordFirstVMFactory
@@ -19,7 +20,7 @@ class RecoveryPasswordFirstFragment : Fragment() {
 
     private lateinit var binding: FragmentRecoveryPasswordFirstBinding
     private val viewModule: RecoveryPasswordFirstViewModule by lazy {
-        ViewModelProvider(this, RecoveryPasswordFirstVMFactory())
+        ViewModelProvider(this, RecoveryPasswordFirstVMFactory(userDbEntity().getUserDatabase()))
             .get(RecoveryPasswordFirstViewModule::class.java)
     }
 

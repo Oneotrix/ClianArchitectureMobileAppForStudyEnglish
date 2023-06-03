@@ -11,6 +11,7 @@ import com.github.oneotrix.englishteasher.data.repository.UserRepositoryImpl
 import com.github.oneotrix.englishteasher.databinding.FragmentRecoveryPasswordThirdBinding
 import com.github.oneotrix.englishteasher.domain.models.Password
 import com.github.oneotrix.englishteasher.domain.usecase.SaveNewPasswordUseCase
+import com.github.oneotrix.englishteasher.presentation.contracts.dbmanager.room.user.userDbEntity
 import com.github.oneotrix.englishteasher.presentation.viewmodel.RecoveryPasswordThirdVM
 import com.github.oneotrix.englishteasher.presentation.viewmodel.factory.RecoveryPasswordThirdVMFactory
 
@@ -18,7 +19,7 @@ class RecoveryPasswordThirdFragment : Fragment() {
 
     private lateinit var binding: FragmentRecoveryPasswordThirdBinding
     private val viewModule: RecoveryPasswordThirdVM by lazy {
-        ViewModelProvider(this, RecoveryPasswordThirdVMFactory())
+        ViewModelProvider(this, RecoveryPasswordThirdVMFactory(userDbEntity().getUserDatabase()))
             .get(RecoveryPasswordThirdVM::class.java)
     }
 

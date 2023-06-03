@@ -11,6 +11,7 @@ import com.github.oneotrix.englishteasher.data.repository.UserRepositoryImpl
 import com.github.oneotrix.englishteasher.databinding.FragmentRecoveryPasswordSecondBinding
 import com.github.oneotrix.englishteasher.domain.models.SecretCode
 import com.github.oneotrix.englishteasher.domain.usecase.SendSecretCodeForRecPasswordUseCase
+import com.github.oneotrix.englishteasher.presentation.contracts.dbmanager.room.user.userDbEntity
 import com.github.oneotrix.englishteasher.presentation.contracts.navigator
 import com.github.oneotrix.englishteasher.presentation.viewmodel.RecoveryPasswordSecondVM
 import com.github.oneotrix.englishteasher.presentation.viewmodel.factory.RecoveryPasswordSecondVMFactory
@@ -19,7 +20,7 @@ class RecoveryPasswordSecondFragment : Fragment() {
 
     private lateinit var binding: FragmentRecoveryPasswordSecondBinding
     private val viewModel: RecoveryPasswordSecondVM by lazy {
-        ViewModelProvider(this, RecoveryPasswordSecondVMFactory())
+        ViewModelProvider(this, RecoveryPasswordSecondVMFactory(userDbEntity().getUserDatabase()))
             .get(RecoveryPasswordSecondVM::class.java)
     }
 
