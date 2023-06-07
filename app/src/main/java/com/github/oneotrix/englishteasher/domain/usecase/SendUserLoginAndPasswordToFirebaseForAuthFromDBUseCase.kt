@@ -7,7 +7,7 @@ import com.github.oneotrix.englishteasher.domain.results.AuthResult
 
 class SendUserLoginAndPasswordToFirebaseForAuthFromDBUseCase(private val userRepository: UserRepository) {
 
-    suspend fun execute() : AuthResult {
+     suspend fun execute() : AuthResult {
         val userLoginAndPassword = userRepository.getUserDataForAuthFromDataBase()
 
         if (userLoginAndPassword != null){

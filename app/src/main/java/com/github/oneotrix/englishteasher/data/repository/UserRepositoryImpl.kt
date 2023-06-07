@@ -32,12 +32,12 @@ class UserRepositoryImpl(userDatabase: AppDatabase) : UserRepository {
         roomStorage?.saveUserData(user)
     }
 
-    override fun sendUserDataToRegInFirebase(userDataReg: UserDataReg) : RegistrationResult {
+    override suspend fun sendUserDataToRegInFirebase(userDataReg: UserDataReg) : String? {
         val user = User(login = userDataReg.login,
                         password = userDataReg.password,
                         email = userDataReg.email)
         val result = firebaseStorage.sendUserDataToRegInFirebase(userRegData = user)
-        return RegistrationResult(result.result, result.description)
+        return result
     }
 
     override fun sendEmailForRecoveryPassword(userEmail: UserEmail) {

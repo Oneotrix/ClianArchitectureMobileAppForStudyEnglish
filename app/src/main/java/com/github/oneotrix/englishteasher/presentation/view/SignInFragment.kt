@@ -1,20 +1,28 @@
 package com.github.oneotrix.englishteasher.presentation.view
 
+import android.content.res.ColorStateList
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.github.oneotrix.englishteasher.data.storage.models.User
-import com.github.oneotrix.englishteasher.data.storage.room.user.UserDAO
+import androidx.lifecycle.lifecycleScope
+import com.github.oneotrix.englishteasher.R
 import com.github.oneotrix.englishteasher.databinding.FragmentSignInBinding
 import com.github.oneotrix.englishteasher.presentation.contracts.dbmanager.room.user.userDbEntity
 import com.github.oneotrix.englishteasher.presentation.contracts.navigator
 import com.github.oneotrix.englishteasher.presentation.viewmodel.SignInViewModel
 import com.github.oneotrix.englishteasher.presentation.viewmodel.factory.SignInViewModelFactory
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.launch
+
+private const val FRAGMENT_TAG = "SignInFragment"
 
 class SignInFragment: Fragment() {
 
@@ -26,6 +34,7 @@ class SignInFragment: Fragment() {
     private lateinit var binding: FragmentSignInBinding
     private var isAuthSuccess: Boolean = false
     private var errorMessage: String? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,7 +52,24 @@ class SignInFragment: Fragment() {
             val email = binding.loginEmailField.text.toString()
             val password = binding.passwordField.text.toString()
 
-            viewModel.signInKeyboard(email = email, password = password)
+            lifecycleScope.launch {
+                errorMessage = viewModel.signInKeyboard(lifecycle = lifecycleScope,email = email, password = password)
+            }
+
+//            Log.i(FRAGMENT_TAG, "result of isAuthSuccess : $isAuthSuccess")
+            if(errorMessage == null) {
+              isAuthSuccess = true
+            }
+//            Log.i(FRAGMENT_TAG, "result of ptr : $ptr")
+//            Log.i(FRAGMENT_TAG, "result of isAuthSuccess : $isAuthSuccess")
+            if(!isAuthSuccess) {
+                makeToast(errorMessage!!, Toast.LENGTH_LONG)
+                setEmailFieldHint()
+                clearEmailField()
+                clearPasswordField()
+            } else {
+                navigator().onRecoveryPasswordFirst()
+            }
         }
 
         binding.RegistrationTextView.setOnClickListener {
@@ -60,24 +86,30 @@ class SignInFragment: Fragment() {
 
     override fun onStart() {
         super.onStart()
-        val message = viewModel.signInDatabase()
-
-        if(message == null) {
-            isAuthSuccess = true
-        } else {
-            isAuthSuccess = false
-            errorMessage = message
+        lifecycleScope.launch {
+            errorMessage = viewModel.signInFromDatabase()
         }
-    }
 
-    override fun onResume() {
-        super.onResume()
-
-        //menu fragment
     }
 
 
+    private fun makeToast(message : String, length : Int) {
+        Toast.makeText(this.context, message, length)
+            .show()
+    }
 
+    private fun setEmailFieldHint() {
+        binding.loginEmailField.setHintTextColor(Color.RED)
+       // binding.loginEmailField.backgroundTintList = context?.resources?.getColorStateList()
+    }
+
+    private fun clearEmailField() {
+        binding.loginEmailField.text.clear()
+    }
+
+    private fun clearPasswordField() {
+        binding.passwordField.text.clear()
+    }
 
 
     companion object {

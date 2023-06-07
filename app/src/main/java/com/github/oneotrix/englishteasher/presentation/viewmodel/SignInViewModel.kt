@@ -1,6 +1,7 @@
 package com.github.oneotrix.englishteasher.presentation.viewmodel
 
 import android.util.Log
+import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -30,8 +31,9 @@ class SignInViewModel(
         Log.i(TAG, "SignInViewModel is created")
     }
 
-     suspend fun signInKeyboard(email: String, password: String) : String?{
+    suspend fun signInKeyboard(lifecycle: LifecycleCoroutineScope, email: String, password: String) : String?{
         val userData = UserLoginAndPassword(login = email, password = password)
+
 
         val answer = sendUserLoginAndPasswordToFirebaseForAuthFromKeyboardUseCase.execute(userLoginAndPassword = userData)
 
@@ -47,7 +49,8 @@ class SignInViewModel(
         }
     }
 
-     suspend fun signInDatabase() : String? {
+    suspend fun signInFromDatabase() : String? {
+        saveUserLoginAndPasswordUseCase.execute(userData = UserLoginAndPassword("loas", "123"))
         val answer = sendUserLoginAndPasswordToFirebaseForAuthFromDBUseCase.execute()
 
          return when(answer) {

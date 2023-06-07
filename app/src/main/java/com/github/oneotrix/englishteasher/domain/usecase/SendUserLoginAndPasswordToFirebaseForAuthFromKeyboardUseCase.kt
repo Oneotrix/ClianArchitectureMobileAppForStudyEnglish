@@ -5,7 +5,7 @@ import com.github.oneotrix.englishteasher.domain.repository.UserRepository
 import com.github.oneotrix.englishteasher.domain.results.AuthResult
 
 class SendUserLoginAndPasswordToFirebaseForAuthFromKeyboardUseCase(private val userRepository: UserRepository) {
-    suspend fun execute(userLoginAndPassword: UserLoginAndPassword) : AuthResult {
+     suspend fun execute(userLoginAndPassword: UserLoginAndPassword) : AuthResult {
         val answer = userRepository.sendDataToAuthInFirebase(userLoginAndPassword)
 
         return if (answer == null) {

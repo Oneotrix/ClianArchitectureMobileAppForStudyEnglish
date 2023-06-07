@@ -5,11 +5,11 @@ import com.github.oneotrix.englishteasher.domain.models.*
 
 interface UserRepository {
 
-    suspend fun sendDataToAuthInFirebase(userLoginAndPassword: UserLoginAndPassword) : String?
+     suspend fun sendDataToAuthInFirebase(userLoginAndPassword: UserLoginAndPassword) : String?
 
     fun saveUserDataInLocalDatabase(userLoginAndPassword: UserLoginAndPassword)
 
-    fun sendUserDataToRegInFirebase(userDataReg: UserDataReg) : RegistrationResult
+    suspend fun sendUserDataToRegInFirebase(userDataReg: UserDataReg) : String?
 
     fun sendEmailForRecoveryPassword(userEmail: UserEmail)
 

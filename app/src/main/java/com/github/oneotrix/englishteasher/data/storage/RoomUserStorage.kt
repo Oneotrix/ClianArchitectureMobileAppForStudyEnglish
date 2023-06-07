@@ -41,14 +41,16 @@ class RoomUserStorage(userDatabase: AppDatabase) : RoomStorage {
     private fun selectUserFromDB() : UserLoginAndPassword?  = runBlocking {
         val user = userDao.getUser()
         try {
-            return@runBlocking UserLoginAndPassword(user[0].email, user[0].password)
+            Log.i("ROOM select user 0", user[0].email)
+            Log.i("ROOM select user 1", user[1].email)
+            return@runBlocking UserLoginAndPassword(user[1].email, user[1].password)
         } catch (e: IndexOutOfBoundsException) {
             return@runBlocking null
         }
     }
 
     private fun insertUser() = runBlocking {
-        userDao.insertEmailAndPassword(User(login = "log", email = "em", password = "pass"))
+        userDao.insertEmailAndPassword(User(login = "", email = "m5hutov@yandex.ru", password = "pass"))
     }
 
 

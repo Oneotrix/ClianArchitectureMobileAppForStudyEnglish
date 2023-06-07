@@ -7,11 +7,11 @@ import com.github.oneotrix.englishteasher.domain.models.UserDataReg
 
 interface FirebaseStorage {
 
-    suspend fun sendDataToAuthInFirebase(userLoginAndPassword: User): String?
+     suspend fun sendDataToAuthInFirebase(userLoginAndPassword: User): String?
 
     fun sendEmailForRecoveryPassword(userEmail: User)
 
     fun sendSecretCodeForRecoveryPassword(firebaseSecretCode: FirebaseSecretCode)
 
-    fun sendUserDataToRegInFirebase(userRegData: User) : RegistrationResult
+    suspend fun sendUserDataToRegInFirebase(userRegData: User) : String?
 }

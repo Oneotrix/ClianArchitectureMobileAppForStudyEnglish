@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
+import androidx.lifecycle.lifecycleScope
 import com.github.oneotrix.englishteasher.data.repository.UserRepositoryImpl
 import com.github.oneotrix.englishteasher.databinding.FragmentRegistrationBinding
 import com.github.oneotrix.englishteasher.domain.models.UserDataReg
@@ -17,10 +18,12 @@ import com.github.oneotrix.englishteasher.presentation.contracts.dbmanager.room.
 import com.github.oneotrix.englishteasher.presentation.contracts.navigator
 import com.github.oneotrix.englishteasher.presentation.viewmodel.RegistrationViewModule
 import com.github.oneotrix.englishteasher.presentation.viewmodel.factory.RegistrationViewModuleFactory
+import kotlinx.coroutines.launch
 
 class RegistrationFragment : Fragment() {
 
     private lateinit var binding: FragmentRegistrationBinding
+    private var errorMessage: String? = null
 
     private val viewModule : RegistrationViewModule by lazy {
         ViewModelProvider(this, RegistrationViewModuleFactory(userDbEntity().getUserDatabase()))
@@ -49,15 +52,36 @@ class RegistrationFragment : Fragment() {
             val email = binding.email.text.toString()
             val password = binding.password.text.toString()
 
-            val result = viewModule.registration(email = email, login = login, password = password)
+            sendDataToReg(
+                login = login,
+                email = email,
+                password = password
+            )
 
-            if (!result.result) {
-                val toast = Toast.makeText(context, result.description, Toast.LENGTH_LONG)
-                toast.show()
+            if(errorMessage == null) {
+                //go next
+            } else {
+                makeToast(message = errorMessage!!)
             }
+
+
         }
 
         return binding.root
+    }
+
+
+    private fun sendDataToReg(login: String, email: String, password: String){
+        lifecycleScope.launch {
+            errorMessage = viewModule.registration(email = email, login = login, password = password)
+
+        }
+
+    }
+
+    private fun makeToast(message : String, length : Int = Toast.LENGTH_LONG) {
+        Toast.makeText(this.context, message, length)
+            .show()
     }
 
 
