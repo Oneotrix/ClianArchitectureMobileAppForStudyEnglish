@@ -19,6 +19,45 @@ class MenuFragment : Fragment() {
 
         binding = FragmentMenuBinding.inflate(inflater, container, false)
 
+        //to personal account fragment
+        binding.personIcon.setOnClickListener {
+
+        }
+
+        //to dictionary fragment
+        binding.bookIcon.setOnClickListener {
+
+        }
+
+        //to SignIn fragment
+        binding.logoutIcon.setOnClickListener {
+
+        }
+
+        //to grammar module fragment
+        binding.grammarModule.setOnClickListener {
+
+        }
+
+        //to time module fragment
+        binding.timeModule.setOnClickListener {
+
+        }
+
+        //to model verbs module fragment
+        binding.modalVerbsModule.setOnClickListener {
+
+        }
+
+        //to idioms fragment
+        binding.idiomsModule.setOnClickListener {
+
+        }
+
+        //to words fragment
+        binding.wordsModule.setOnClickListener {
+
+        }
 
 
         return binding.root
