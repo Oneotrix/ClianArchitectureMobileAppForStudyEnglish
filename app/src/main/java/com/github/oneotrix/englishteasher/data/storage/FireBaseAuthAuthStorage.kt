@@ -1,20 +1,11 @@
 package com.github.oneotrix.englishteasher.data.storage
 
 import android.util.Log
-import com.github.oneotrix.englishteasher.data.storage.firebase.FirebaseObject
-import com.github.oneotrix.englishteasher.data.storage.interfaces.FirebaseStorage
+import com.github.oneotrix.englishteasher.data.storage.interfaces.FirebaseAuthStorage
 import com.github.oneotrix.englishteasher.data.storage.models.FirebaseSecretCode
-import com.github.oneotrix.englishteasher.data.storage.models.RegistrationResult
 import com.github.oneotrix.englishteasher.data.storage.models.User
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
 
 
 private const val FIREBASE_AUTH_TAG = "Firebase auth"
@@ -22,7 +13,7 @@ private const val FIREBASE_REG_TAG = "Firebase reg"
 private const val FIREBASE_RESENT_MESSAGE_TAG = "Firebase resent message"
 
 
-class FireBaseUserStorage : FirebaseStorage {
+class FireBaseAuthAuthStorage : FirebaseAuthStorage {
 
     private val firebaseAuth: FirebaseAuth by lazy {
         FirebaseAuth.getInstance()

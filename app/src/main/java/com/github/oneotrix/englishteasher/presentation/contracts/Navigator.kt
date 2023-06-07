@@ -20,4 +20,6 @@ interface Navigator {
 
     fun onRecoveryPasswordThird()
 
+    fun onMenu()
+
 }

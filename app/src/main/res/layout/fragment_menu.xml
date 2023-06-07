@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/menu"
+            android:scaleType="centerCrop"
+            android:alpha="0.95"
+            >
+
+        </ImageView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#3B4D2E2E">
+
+        </View>
+
+        <ImageView
+            android:id="@+id/bookIcon"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="350dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_baseline_book_24"
+            >
+
+        </ImageView>
+
+        <ImageView
+            android:id="@+id/logoutIcon"
+            android:layout_marginTop="680dp"
+            android:layout_marginStart="370dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_baseline_logout_24"
+            >
+
+        </ImageView>
+
+        <ImageView
+            android:id="@+id/personIcon"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="20dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_baseline_man_24"
+            >
+
+        </ImageView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <FrameLayout
+                android:id="@+id/grammarModule"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="100dp"
+                android:background="#B1BB2561"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Грамматика"
+                    android:textColor="#FBC02D"
+                    android:textSize="25sp">
+
+                </TextView>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/timeModule"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="360dp"
+
+                android:background="#B1BB2561"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Времена"
+                    android:textColor="#FBC02D"
+                    android:textSize="25sp">
+
+                </TextView>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/modalVerbsModule"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="230dp"
+                android:background="#B1BB2561"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.495"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Модальные глаголы"
+                    android:textColor="#FBC02D"
+                    android:textSize="25sp">
+
+                </TextView>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/idiomsModule"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="490dp"
+                android:background="#B1BB2561"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.504"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Идиомы"
+                    android:textColor="#FBC02D"
+                    android:textSize="25sp">
+
+                </TextView>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/wordsModule"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="620dp"
+                android:background="#B1BB2561"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Секция Слов"
+                    android:textColor="#FBC02D"
+                    android:textSize="25sp">
+
+                </TextView>
+
+            </FrameLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </FrameLayout>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

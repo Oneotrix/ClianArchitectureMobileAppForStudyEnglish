@@ -1,8 +1,8 @@
 package com.github.oneotrix.englishteasher.data.repository
 
-import com.github.oneotrix.englishteasher.data.storage.FireBaseUserStorage
+import com.github.oneotrix.englishteasher.data.storage.FireBaseAuthAuthStorage
 import com.github.oneotrix.englishteasher.data.storage.RoomUserStorage
-import com.github.oneotrix.englishteasher.data.storage.interfaces.FirebaseStorage
+import com.github.oneotrix.englishteasher.data.storage.interfaces.FirebaseAuthStorage
 import com.github.oneotrix.englishteasher.data.storage.interfaces.RoomStorage
 import com.github.oneotrix.englishteasher.data.storage.models.FirebaseSecretCode
 import com.github.oneotrix.englishteasher.data.storage.models.User
@@ -15,12 +15,12 @@ import com.github.oneotrix.englishteasher.domain.repository.UserRepository
 class UserRepositoryImpl(userDatabase: AppDatabase) : UserRepository {
 
     private val roomStorage: RoomStorage = RoomUserStorage(userDatabase)
-    private val firebaseStorage: FirebaseStorage = FireBaseUserStorage()
+    private val firebaseAuthStorage: FirebaseAuthStorage = FireBaseAuthAuthStorage()
     override suspend fun sendDataToAuthInFirebase(userLoginAndPassword: UserLoginAndPassword) : String? {
         val user = User(email = userLoginAndPassword.login,
                         password = userLoginAndPassword.password,
                         login = "")
-        val result = firebaseStorage.sendDataToAuthInFirebase(user)
+        val result = firebaseAuthStorage.sendDataToAuthInFirebase(user)
 
         return result
     }
@@ -36,7 +36,7 @@ class UserRepositoryImpl(userDatabase: AppDatabase) : UserRepository {
         val user = User(login = userDataReg.login,
                         password = userDataReg.password,
                         email = userDataReg.email)
-        val result = firebaseStorage.sendUserDataToRegInFirebase(userRegData = user)
+        val result = firebaseAuthStorage.sendUserDataToRegInFirebase(userRegData = user)
         return result
     }
 
@@ -44,12 +44,12 @@ class UserRepositoryImpl(userDatabase: AppDatabase) : UserRepository {
         val user = User(login = "",
                         password = "",
                         email = userEmail.email)
-        firebaseStorage?.sendEmailForRecoveryPassword(user)
+        firebaseAuthStorage?.sendEmailForRecoveryPassword(user)
     }
 
     override fun sendSecretCodeForRecoveryPassword(secretCode: SecretCode) {
         val firebaseSecretCode = FirebaseSecretCode(code = secretCode.secretCode)
-        firebaseStorage?.sendSecretCodeForRecoveryPassword(firebaseSecretCode)
+        firebaseAuthStorage?.sendSecretCodeForRecoveryPassword(firebaseSecretCode)
     }
 
     override fun saveNewPassword(password: Password) {

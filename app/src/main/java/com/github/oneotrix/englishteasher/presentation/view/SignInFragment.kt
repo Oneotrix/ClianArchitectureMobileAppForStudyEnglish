@@ -56,19 +56,17 @@ class SignInFragment: Fragment() {
                 errorMessage = viewModel.signInKeyboard(lifecycle = lifecycleScope,email = email, password = password)
             }
 
-//            Log.i(FRAGMENT_TAG, "result of isAuthSuccess : $isAuthSuccess")
             if(errorMessage == null) {
               isAuthSuccess = true
             }
-//            Log.i(FRAGMENT_TAG, "result of ptr : $ptr")
-//            Log.i(FRAGMENT_TAG, "result of isAuthSuccess : $isAuthSuccess")
+
             if(!isAuthSuccess) {
                 makeToast(errorMessage!!, Toast.LENGTH_LONG)
                 setEmailFieldHint()
                 clearEmailField()
                 clearPasswordField()
             } else {
-                navigator().onRecoveryPasswordFirst()
+                navigator().onMenu()
             }
         }
 
@@ -90,6 +88,13 @@ class SignInFragment: Fragment() {
             errorMessage = viewModel.signInFromDatabase()
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if(errorMessage == null) {
+            navigator().onMenu()
+        }
     }
 
 

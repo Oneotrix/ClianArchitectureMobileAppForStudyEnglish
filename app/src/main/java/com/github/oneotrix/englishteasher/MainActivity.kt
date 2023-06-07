@@ -67,6 +67,10 @@ class MainActivity : AppCompatActivity(),
         launchFragment(fragment = RecoveryPasswordThirdFragment.newInstance())
     }
 
+    override fun onMenu() {
+        launchFragment(fragment = MenuFragment.newInstance())
+    }
+
     private fun launchFragment(fragment: Fragment) {
             supportFragmentManager
                 .beginTransaction()
